@@ -1,6 +1,7 @@
 # Base Class
 require 'nretnil/compendium-api/compendium'
 # Endpoint Classes
+require 'nretnil/compendium-api/api_exception'
 require 'nretnil/compendium-api/calendar'
 require 'nretnil/compendium-api/callback'
 require 'nretnil/compendium-api/category'

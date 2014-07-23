@@ -18,12 +18,17 @@ module Nretnil
       def fire(name, arguments)
           query = { :EventName => name, :EventArgs => arguments.to_json }
           response = @session.post( '/app/callback/fire', query )
+          parsed = response.parsed_response
+          if parsed.key?("Error")
+            raise ApiException, parsed["Error"]
+          end
+          parsed["Success"]
       end
 
       def required_params
         @auth
       end
-    
+
     end
 
   end
