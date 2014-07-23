@@ -15,8 +15,15 @@ module Nretnil
         @session = s
       end
 
-      def fire(name, arguments)
+      def fire(name, arguments, network_id = nil, schedule_at = nil)
           query = { :EventName => name, :EventArgs => arguments.to_json }
+          if network_id
+            query[:NetworkId] = network_id
+          end
+          if schedule_at
+            query[:ScheduleAt] = schedule_at
+          end
+
           response = @session.post( '/app/callback/fire', query )
           parsed = response.parsed_response
           if parsed.key?("Error")
